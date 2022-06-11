@@ -6,6 +6,7 @@ import '/widget/bottom_button.dart';
 import '/widget/icon_content.dart';
 import '/widget/reusable_card.dart';
 import '/widget/round_icon_button.dart';
+import '/data/class/human.dart';
 import 'package:flutter/material.dart';
 
 class InputPage extends StatefulWidget {
@@ -16,37 +17,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Gender? selectedGender;
-  int height = 180;
-  int weight = 60;
-  int age = 20;
 
-  double _bmi = 0.0;
-
-  String calculateBMI() {
-    _bmi = weight / pow(height / 100, 2);
-    return _bmi.toStringAsFixed(1);
-  }
-
-  String getResult() {
-    if (_bmi >= 25) {
-      return 'Overweight';
-    } else if (_bmi > 18.5) {
-      return 'Normal';
-    } else {
-      return 'Underweight';
-    }
-  }
-
-  String getInterpretation() {
-    if (_bmi >= 25) {
-      return 'You have a higher than normal body weight. Try to exercise more.';
-    } else if (_bmi > 18.5) {
-      return 'You have a normal body weight. Good job!';
-    } else {
-      return 'You have a lower than normal body weight. You can eat a bit more.';
-    }
-  }
+  var Me = Human(selectedGender: Gender.male,age: 20, height: 150,weight: 53);
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +37,10 @@ class _InputPageState extends State<InputPage> {
                   child: ReusableCard(
                     onPress: () {
                       setState(() {
-                        selectedGender = Gender.male;
+                        Me.selectedGender = Gender.male;
                       });
                     },
-                    colorWidget: selectedGender == Gender.male
+                    colorWidget: Me.selectedGender == Gender.male
                         ? kActiveCardColour
                         : kInactiveCardColour,
                     cardChild: const IconContent(
@@ -81,10 +53,10 @@ class _InputPageState extends State<InputPage> {
                   child: ReusableCard(
                     onPress: () {
                       setState(() {
-                        selectedGender = Gender.female;
+                        Me.selectedGender = Gender.female;
                       });
                     },
-                    colorWidget: selectedGender == Gender.female
+                    colorWidget: Me.selectedGender == Gender.female
                         ? kActiveCardColour
                         : kInactiveCardColour,
                     cardChild: const IconContent(
@@ -112,7 +84,7 @@ class _InputPageState extends State<InputPage> {
                     textBaseline: TextBaseline.alphabetic,
                     children: [
                       Text(
-                        height.toString(),
+                        Me.height.toString(),
                         style: kNumberTextStyle,
                       ),
                       const Text(
@@ -133,12 +105,12 @@ class _InputPageState extends State<InputPage> {
                           const RoundSliderOverlayShape(overlayRadius: 30.0),
                     ),
                     child: Slider(
-                        value: height.toDouble(),
+                        value: Me.height!.toDouble(),
                         min: 10.0,
                         max: 300.0,
                         onChanged: (double newValue) {
                           setState(() {
-                            height = newValue.round();
+                            Me.height = newValue.round();
                           });
                         }),
                   ),
@@ -160,7 +132,7 @@ class _InputPageState extends State<InputPage> {
                           style: kLabelTextStyle,
                         ),
                         Text(
-                          weight.toString(),
+                          Me.weight.toString(),
                           style: kNumberTextStyle,
                         ),
                         Row(
@@ -170,7 +142,7 @@ class _InputPageState extends State<InputPage> {
                               iconItem: Icons.remove,
                               onPress: () {
                                 setState(() {
-                                  weight--;
+                                  Me.weight=(Me.weight)!-1;
                                 });
                               },
                             ),
@@ -181,7 +153,7 @@ class _InputPageState extends State<InputPage> {
                               iconItem: Icons.add,
                               onPress: () {
                                 setState(() {
-                                  weight++;
+                                  Me.weight=(Me.weight)!+1;
                                 });
                               },
                             ),
@@ -202,7 +174,7 @@ class _InputPageState extends State<InputPage> {
                           style: kLabelTextStyle,
                         ),
                         Text(
-                          age.toString(),
+                          Me.age.toString(),
                           style: kNumberTextStyle,
                         ),
                         Row(
@@ -212,7 +184,7 @@ class _InputPageState extends State<InputPage> {
                               iconItem: Icons.remove,
                               onPress: () {
                                 setState(() {
-                                  age--;
+                                  Me.age=(Me.age)!-1;
                                 });
                               },
                             ),
@@ -223,7 +195,7 @@ class _InputPageState extends State<InputPage> {
                               iconItem: Icons.add,
                               onPress: () {
                                 setState(() {
-                                  age++;
+                                  Me.age=(Me.age)!+1;
                                 });
                               },
                             ),
@@ -243,9 +215,9 @@ class _InputPageState extends State<InputPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ResultPage(
-                    bmiResult: calculateBMI(),
-                    resultText: getResult(),
-                    interpretation: getInterpretation(),
+                    bmiResult: Me.calculateBMI(),
+                    resultText: Me.getResult(),
+                    interpretation: Me.getInterpretation(),
                   ),
                 ),
               );
