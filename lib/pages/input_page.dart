@@ -18,7 +18,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
 
-  var Me = Human(selectedGender: Gender.male,age: 20, height: 150,weight: 53);
+  var me = Human(selectedGender: Gender.male,age: 20, height: 150,weight: 53);
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +37,10 @@ class _InputPageState extends State<InputPage> {
                   child: ReusableCard(
                     onPress: () {
                       setState(() {
-                        Me.selectedGender = Gender.male;
+                        me.selectedGender = Gender.male;
                       });
                     },
-                    colorWidget: Me.selectedGender == Gender.male
+                    colorWidget: me.selectedGender == Gender.male
                         ? kActiveCardColour
                         : kInactiveCardColour,
                     cardChild: const IconContent(
@@ -53,10 +53,10 @@ class _InputPageState extends State<InputPage> {
                   child: ReusableCard(
                     onPress: () {
                       setState(() {
-                        Me.selectedGender = Gender.female;
+                        me.selectedGender = Gender.female;
                       });
                     },
-                    colorWidget: Me.selectedGender == Gender.female
+                    colorWidget: me.selectedGender == Gender.female
                         ? kActiveCardColour
                         : kInactiveCardColour,
                     cardChild: const IconContent(
@@ -84,7 +84,7 @@ class _InputPageState extends State<InputPage> {
                     textBaseline: TextBaseline.alphabetic,
                     children: [
                       Text(
-                        Me.height.toString(),
+                        me.height.toString(),
                         style: kNumberTextStyle,
                       ),
                       const Text(
@@ -97,20 +97,21 @@ class _InputPageState extends State<InputPage> {
                     data: SliderTheme.of(context).copyWith(
                       inactiveTrackColor: const Color(0xFF8D8E98),
                       activeTickMarkColor: Colors.white,
-                      thumbColor: const Color(0xFFEB1555),
-                      overlayColor: const Color(0x29EB1555),
+                      thumbColor: const Color(0xFFEB9515),
+                      overlayColor: const Color(0x29EB8415),
+                      activeTrackColor: const Color(0xD02A8D34),
                       thumbShape:
                           const RoundSliderThumbShape(enabledThumbRadius: 15.0),
                       overlayShape:
                           const RoundSliderOverlayShape(overlayRadius: 30.0),
                     ),
                     child: Slider(
-                        value: Me.height!.toDouble(),
+                        value: me.height!.toDouble(),
                         min: 10.0,
                         max: 300.0,
                         onChanged: (double newValue) {
                           setState(() {
-                            Me.height = newValue.round();
+                            me.height = newValue.round();
                           });
                         }),
                   ),
@@ -132,7 +133,7 @@ class _InputPageState extends State<InputPage> {
                           style: kLabelTextStyle,
                         ),
                         Text(
-                          Me.weight.toString(),
+                          me.weight.toString(),
                           style: kNumberTextStyle,
                         ),
                         Row(
@@ -142,7 +143,7 @@ class _InputPageState extends State<InputPage> {
                               iconItem: Icons.remove,
                               onPress: () {
                                 setState(() {
-                                  Me.weight=(Me.weight)!-1;
+                                  me.weight=(me.weight)!-1;
                                 });
                               },
                             ),
@@ -153,7 +154,7 @@ class _InputPageState extends State<InputPage> {
                               iconItem: Icons.add,
                               onPress: () {
                                 setState(() {
-                                  Me.weight=(Me.weight)!+1;
+                                  me.weight=(me.weight)!+1;
                                 });
                               },
                             ),
@@ -174,7 +175,7 @@ class _InputPageState extends State<InputPage> {
                           style: kLabelTextStyle,
                         ),
                         Text(
-                          Me.age.toString(),
+                          me.age.toString(),
                           style: kNumberTextStyle,
                         ),
                         Row(
@@ -184,7 +185,7 @@ class _InputPageState extends State<InputPage> {
                               iconItem: Icons.remove,
                               onPress: () {
                                 setState(() {
-                                  Me.age=(Me.age)!-1;
+                                  me.age=(me.age)!-1;
                                 });
                               },
                             ),
@@ -195,7 +196,7 @@ class _InputPageState extends State<InputPage> {
                               iconItem: Icons.add,
                               onPress: () {
                                 setState(() {
-                                  Me.age=(Me.age)!+1;
+                                  me.age=(me.age)!+1;
                                 });
                               },
                             ),
@@ -215,9 +216,9 @@ class _InputPageState extends State<InputPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ResultPage(
-                    bmiResult: Me.calculateBMI(),
-                    resultText: Me.getResult(),
-                    interpretation: Me.getInterpretation(),
+                    bmiResult: me.calculateBMI(),
+                    resultText: me.getResult(),
+                    interpretation: me.getInterpretation(),
                   ),
                 ),
               );

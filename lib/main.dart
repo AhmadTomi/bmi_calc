@@ -15,10 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'BMI CALCULATOR',
       theme: ThemeData(
-        primaryColor: const Color(0xFF0A0E21),
-        scaffoldBackgroundColor: const Color(0xFF0A0E21),
+        primaryColor: const Color(0xFF0A2112),
+        scaffoldBackgroundColor: const Color(0xFF0A210B),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF0A0E21),
+          backgroundColor: Color(0xFF0F210A),
         ),
       ),
       home: const InputPage(),
